@@ -1,0 +1,42 @@
+
+
+name: CI
+
+
+on:
+
+  push:
+    branches: [ "main","dev" ]
+  pull_request:
+    branches: [ "main" ,"dev"]
+
+
+
+jobs:
+  # This workflow contains a single job called "build"
+  main :
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    if : github.event=='refs/heads/main'
+    env:
+       API_KEY: "prod-api-123"
+    steps:
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo building production
+          echo "API_KEY:${API_KEY}"
+          echo "triggered on ${{github.event_name}} to {{github.event}}"
+  dev :
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    if : github.event=='refs/heads/dev'
+    env:
+       API_KEY: "dev-api-123"
+    steps:
+      - name: Run a multi-line script
+        run: |
+       
+          echo building development
+          echo "API_KEY:${API_KEY}"
+          echo "triggered on ${{github.event_name}} to {{github.event}}"
